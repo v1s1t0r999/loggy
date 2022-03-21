@@ -67,7 +67,7 @@ def set_datefmt(strftime):
     `loggy.set_datefmt("%H:%M") # hh:mn`
     """
     fmt['d']=strftime
-    return date_fmt
+    return fmt
 
 def side_seperator(lsep,rsep):
     """
@@ -76,9 +76,9 @@ def side_seperator(lsep,rsep):
     `[DATE] SEP "L_SEP" EVENT "R_SEP" LOG`
     `loggy.side_seperator(lsep="||",rsep="||") # Default vals`
     """
-    date_fmt['ls']=lsep
-    date_fmt['rs']=rsep
-    return date_fmt
+    fmt['ls']=lsep
+    fmt['rs']=rsep
+    return fmt
 
 
 def set_seperator(sep):
@@ -88,14 +88,14 @@ def set_seperator(sep):
     `[DATE] SEP "L_SEP" EVENT "R_SEP" LOG`
     `loggy.side_seperator(lsep="||",rsep="||") # Default vals`
     """
-    date_fmt['s']=str(sep)
-    return date_fmt
+    fmt['s']=str(sep)
+    return fmt
 
 def info(con,mode="a"):
     #f2=open(conf_file['info'],"r")
     #c=f2.read();f2.close()
     f = open(conf_file['info'],mode)
-    c="\n[{0}] {2} {3}   INFO   {4} {1} ".format(now(),con,date_fmt['s'],date_fmt['ls'],date_fmt['rs'])
+    c="\n[{0}] {2} {3}   INFO   {4} {1} ".format(now(),con,fmt['s'],fmt['ls'],fmt['rs'])
     f.write(c)
     f.close()
     return True
@@ -105,7 +105,7 @@ def error(con,mode="w"):
     f2=open(conf_file['error'],"r")
     c=f2.read();f2.close()
     f = open(conf_file['error'],mode)
-    c="{2}\n[{0}] {3} {4}   ERROR  {5} {1} ".format(now(),con,c,date_fmt['s'],date_fmt['ls'],date_fmt['rs'])
+    c="{2}\n[{0}] {3} {4}   ERROR  {5} {1} ".format(now(),con,c,fmt['s'],fmt['ls'],fmt['rs'])
     f.write(c)
     f.close()
     return True
@@ -116,7 +116,7 @@ def critical(con,mode="w"):
     c=f2.read();f2.close()
     #print(c)
     f = open(conf_file['critical'],mode)
-    c="{2}\n[{0}] {3} {4} CRITICAL {5} {1} ".format(now(),con,c,date_fmt['s'],date_fmt['ls'],date_fmt['rs'])
+    c="{2}\n[{0}] {3} {4} CRITICAL {5} {1} ".format(now(),con,c,fmt['s'],fmt['ls'],fmt['rs'])
     #print(c)
     f.write(c)
     f.close()
@@ -136,13 +136,13 @@ def custom(name,con,mode="w"):
     f2=open(conf_file[name],"r")
     c1=f2.read();f2.close()
     f = open(conf_file[name],mode)
-    c="{2}\n[{0}] {3} {4} {6} {5} {1} ".format(now(),con,c1,date_fmt['s'],date_fmt['ls'],date_fmt['rs'],name)
+    c="{2}\n[{0}] {3} {4} {6} {5} {1} ".format(now(),con,c1,fmt['s'],fmt['ls'],fmt['rs'],name)
     f.write(c)
     f.close()
     return True
     '''
     f = open(conf_file[name],mode)
-    c="\n[{0}] {3} {4}  {2}  {5} {1}".format(now(),con,name,date_fmt['s'],date_fmt['ls'],date_fmt['rs'])
+    c="\n[{0}] {3} {4}  {2}  {5} {1}".format(now(),con,name,fmt['s'],fmt['ls'],fmt['rs'])
     f.append(c)
     f.close()
     return True
